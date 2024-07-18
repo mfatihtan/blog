@@ -7,6 +7,8 @@ import IconI from 'react-native-vector-icons/Ionicons';
 import IconFA5 from 'react-native-vector-icons/FontAwesome5';
 import IconAD from 'react-native-vector-icons/AntDesign';
 import IconCMI from 'react-native-vector-icons/MaterialCommunityIcons';
+import IconEI from 'react-native-vector-icons/EvilIcons';
+import IconF from 'react-native-vector-icons/Feather';
 
 const RenderIcon = ({ Icon, name, size = 24, color = themeColor.royalBlue }: any) => {
       if (Icon == "IconE") {
@@ -25,6 +27,10 @@ const RenderIcon = ({ Icon, name, size = 24, color = themeColor.royalBlue }: any
             Icon = IconAD;
       } else if (Icon == "IconCMI") {
             Icon = IconCMI
+      } else if (Icon == "IconEI") {
+            Icon = IconEI;
+      } else if (Icon == "IconF") {
+            Icon = IconF;
       }
       return (
             <Icon name={name} size={size} color={color} />

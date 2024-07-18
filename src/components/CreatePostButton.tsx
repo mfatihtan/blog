@@ -23,12 +23,11 @@ const styles = StyleSheet.create({
             borderRadius: 20,
       },
       button: {
-            width: 70,
-            padding: 5,
+            padding: 10,
       },
       image: {
-            width: 60,
-            height: 60,
+            width: 50,
+            height: 50,
             resizeMode: "stretch",
       },
 })
