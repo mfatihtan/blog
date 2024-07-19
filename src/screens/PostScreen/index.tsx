@@ -1,26 +1,24 @@
-import { FlatList, Image, ScrollView, StatusBar, StyleSheet, Text, View } from 'react-native'
+import { ScrollView, StatusBar, StyleSheet, Text, View } from 'react-native'
 import React, { useState } from 'react'
-import { height, width } from '../../theme/dimension'
-import themeColor from '../../theme/themeColor'
 import { PostDetail, PostHead, Comments, } from '../../components'
+import { useSelector } from 'react-redux';
 
 const Index = ({ route }: any) => {
       const [visible, setVisible] = useState(false);
       const { item } = route.params
-      const comments = [...item.comments];
-
+      const postData = useSelector((state: any) => state.data.data[item]);
       return (
             <View style={styles.root}>
                   <StatusBar translucent backgroundColor={"transparent"} barStyle={"dark-content"} />
                   <ScrollView>
-                        <PostHead item={item} />
+                        <PostHead postData={postData} />
                         <View style={styles.body}>
-                              <Text style={styles.desc}>{item.description}</Text>
-                              <Text style={styles.text}>{item.body}</Text>
+                              <Text style={styles.desc}>{postData.description}</Text>
+                              <Text style={styles.text}>{postData.body}</Text>
                         </View>
                   </ScrollView>
-                  <PostDetail item={item} />
-                  <Comments item={comments} visible={visible} setVisible={setVisible} />
+                  <PostDetail setVisible={setVisible} postId={item} />
+                  <Comments item={item} visible={visible} setVisible={setVisible} />
             </View>
       )
 }

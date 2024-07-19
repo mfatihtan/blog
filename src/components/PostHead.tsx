@@ -3,12 +3,12 @@ import React from 'react'
 import themeColor from '../theme/themeColor'
 import { height, width } from '../theme/dimension'
 
-const PostHead = ({ item }: any) => {
+const PostHead = ({ postData }: any) => {
       return (
-            <View style={[styles.headInfo, item.image == "" && { backgroundColor: themeColor.royalBlue }]}>
-                  {item.image != "" && <Image source={{ uri: item.image }} style={styles.image} />}
+            <View style={[styles.headInfo, postData.image == "" && { backgroundColor: themeColor.royalBlue }]}>
+                  {postData.image != "" && <Image source={{ uri: postData.image }} style={styles.image} />}
                   <View style={styles.head}>
-                        <Text style={styles.headText}>{item.head}</Text>
+                        <Text style={styles.headText}>{postData.head}</Text>
                   </View>
             </View>
       )

@@ -8,6 +8,10 @@ import HomeHeader from "./HomeHeader";
 import PostDetail from "./PostDetail";
 import PostHead from "./PostHead";
 import Comments from "./Comments";
+import RenderComment from "./RenderComment";
+import NewComment from "./NewComment";
+import CreatePostBody from "./CreatePostBody";
+import SelectImage from './SelectImage';
 
 export {
       CostumButton,
@@ -20,4 +24,8 @@ export {
       PostDetail,
       PostHead,
       Comments,
+      RenderComment,
+      NewComment,
+      CreatePostBody,
+      SelectImage,
 }

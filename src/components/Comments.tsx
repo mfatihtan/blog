@@ -1,18 +1,15 @@
-import { KeyboardAvoidingView, Modal, Platform, ScrollView, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
-import React from 'react'
-import { height, width } from '../theme/dimension'
-import themeColor from '../theme/themeColor'
-import RenderIcon from './RenderIcon'
+import { Modal, ScrollView, StatusBar, StyleSheet, Text, View } from 'react-native'
+import React, { useEffect, useRef } from 'react'
+import { RenderComment, NewComment } from '../components';
+import { useSelector } from 'react-redux';
 
 const Comments = ({ item, visible, setVisible }: any) => {
-      const RenderComment = (item: any) => {
-            return (
-                  <View key={item.comment_id} style={styles.comment}>
-                        <Text style={styles.userName}>{item.comment_user_name}</Text>
-                        <Text style={styles.commentText}>{item.comment}</Text>
-                  </View>
-            )
-      }
+      const postComments = useSelector((state: any) => state.data.data[item].comments);
+      const scrollViewRef = useRef<ScrollView>(null);
+
+      useEffect(() => {
+            scrollViewRef.current?.scrollToEnd({ animated: true });
+      }, [postComments]);
       return (
             <Modal
                   visible={visible}
@@ -24,24 +21,14 @@ const Comments = ({ item, visible, setVisible }: any) => {
                   <View style={styles.root}>
                         <View style={styles.body}>
                               <View style={styles.head}>
-                                    <Text style={styles.headText}>Yorumlar ({item.length})</Text>
+                                    <Text style={styles.headText}>Yorumlar ({postComments.length})</Text>
                               </View>
-                              <ScrollView style={{ backgroundColor: "#f1f1f1", }}>
+                              <ScrollView ref={scrollViewRef} style={{ backgroundColor: "#f1f1f1", }}>
                                     <View style={styles.comments}>
-                                          {item.map((item: any) => RenderComment(item))}
+                                          {postComments.map((item: any) => RenderComment(item))}
                                     </View>
                               </ScrollView>
-                              <KeyboardAvoidingView
-                                    behavior={Platform.OS === "android" ? "padding" : "padding"}
-                                    keyboardVerticalOffset={Platform.OS === "android" ? 50 : 0}
-                              >
-                                    <View style={styles.newComment}>
-                                          <View style={styles.row}>
-                                                <TextInput multiline placeholder='Yorum yazmaya başla...' style={styles.input} />
-                                                <TouchableOpacity style={styles.button}><RenderIcon Icon={"IconAD"} name={"arrowup"} color={"white"} /></TouchableOpacity>
-                                          </View>
-                                    </View>
-                              </KeyboardAvoidingView>
+                              <NewComment item={item} />
                         </View>
                   </View>
             </Modal >
@@ -79,47 +66,5 @@ const styles = StyleSheet.create({
       comments: {
             padding: 10,
             backgroundColor: "#f1f1f1"
-      },
-      comment: {
-            padding: 10,
-            marginBottom: 20,
-            backgroundColor: "white",
-            borderColor: "gray",
-            borderWidth: 1,
-            borderRadius: 15,
-      },
-      userName: {
-            fontSize: 18,
-            fontWeight: "600",
-            marginBottom: 10,
-            color: "black",
-      },
-      commentText: {
-            fontSize: 16,
-            fontWeight: "400",
-            color: "gray",
-      },
-      newComment: {
-            padding: 20,
-            backgroundColor: "white",
-            borderTopWidth: 1,
-            borderColor: "lightgray",
-      },
-      row: {
-            padding: 10,
-            borderWidth: 1,
-            borderColor: "lightgray",
-            borderRadius: 15,
-      },
-      input: {
-            width: width * 0.73,
-      },
-      button: {
-            position: "absolute",
-            right: width * 0.03,
-            bottom: 10,
-            backgroundColor: themeColor.royalBlue,
-            padding: 10,
-            borderRadius: 15,
       },
 })
