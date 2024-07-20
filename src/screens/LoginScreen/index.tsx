@@ -3,10 +3,13 @@ import themeColor from '../../theme/themeColor';
 import { width, height } from '../../theme/dimension';
 import { CostumInput, CostumButton } from '../../components';
 import { Image, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { loading } from '../../redux/sileces/authSlice';
+import { useDispatch, UseDispatch } from 'react-redux';
 
 const Index = ({ navigation }: any) => {
       const [email, setEmail] = useState("");
       const [password, setPassword] = useState("");
+      const dispatch = useDispatch();
       return (
             <SafeAreaView style={styles.root}>
                   <ScrollView style={{ flexGrow: 1 }}>
@@ -18,7 +21,7 @@ const Index = ({ navigation }: any) => {
                                     <TouchableOpacity><Text style={[styles.text, { color: themeColor.royalBlue }]}>Şifremi unuttum</Text></TouchableOpacity>
                               </View>
                               <View style={styles.buttonView}>
-                                    <CostumButton text={"Giriş yap"} backgroundColor={themeColor.yellow} borderColor={themeColor.yellowDark} />
+                                    <CostumButton onPress={() => dispatch(loading("kkdkfs"))} text={"Giriş yap"} backgroundColor={themeColor.yellow} borderColor={themeColor.yellowDark} />
                                     <View style={styles.buttonSecond}>
                                           <Text style={styles.text}>Henüz hesabın yok mu, </Text>
                                           <TouchableOpacity onPress={() => navigation.navigate("Signup")}><Text style={[styles.text, { color: themeColor.royalBlue }]}>Kayıt ol</Text></TouchableOpacity>

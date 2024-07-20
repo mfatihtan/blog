@@ -20,9 +20,17 @@ export const dataSlice = createSlice({
             setComment: (state, actions) => {
                   state.data[actions.payload.postId].comments.push(actions.payload.newComment);
                   //console.log("comments: ", state.data[actions.payload.postId].comments);
+            },
+            setNewPost: (state, actions) => {
+                  state.data = {
+                        [actions.payload.postId]: actions.payload.post,
+                        ...state.data,
+                  };
+                  // console.log(actions.payload);
             }
+
       },
 })
 
-export const { setLikePost, setUnLikePost, setComment } = dataSlice.actions;
+export const { setLikePost, setUnLikePost, setComment, setNewPost } = dataSlice.actions;
 export default dataSlice.reducer;

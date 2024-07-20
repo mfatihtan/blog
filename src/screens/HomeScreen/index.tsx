@@ -1,10 +1,11 @@
 import { FlatList, StatusBar, StyleSheet, View } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { CreatePostButton, CreatePost, RenderBlogPost, HomeHeader } from '../../components'
 import { useSelector } from 'react-redux';
 
 const Index = ({ navigation }: any) => {
-      const [data, setData] = useState(useSelector((state: any) => state.data.data));
+      const postData = useSelector((state: any) => state.data.data);
+      const [data, setData] = useState(postData);
       const [visible, setVisible] = useState(false);
       const [numberOfLines, setNumberOfLines] = useState(1);
       const [style, setSyle] = useState("list");
@@ -13,6 +14,9 @@ const Index = ({ navigation }: any) => {
             setNumberOfLines(number);
             setSyle(style)
       }
+      useEffect(() => {
+            setData(postData);
+      }, [postData])
       return (
             <View style={styles.root}>
                   <StatusBar translucent barStyle={"light-content"} backgroundColor={"transparent"} />

@@ -35,15 +35,11 @@ const styles = StyleSheet.create({
       },
       body: {
             alignItems: "center",
-            height: height * 0.85,
+            height: height,
             backgroundColor: themeColor.white,
       },
       head: {
             padding: 10,
-            borderBottomWidth: 2,
-            borderColor: "gray",
-            borderTopLeftRadius: 30,
-            borderTopRightRadius: 30,
             backgroundColor: themeColor.royalBlue,
             width: width,
             alignItems: "center",

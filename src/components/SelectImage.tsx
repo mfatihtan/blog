@@ -1,4 +1,4 @@
-import { FlatList, Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { FlatList, Image, Keyboard, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import React, { useCallback, useDebugValue, useState } from 'react'
 import { height, width } from '../theme/dimension'
 import RenderIcon from './RenderIcon'
@@ -12,12 +12,14 @@ const SelectImage = ({ setSelectImg }: any) => {
       const [input, setInput] = useState("");
       const [images, setImages] = useState([]);
       const handleImages = async (input: string) => {
+            Keyboard.dismiss()
             const data: any = await getImage(input);
             setImages(data);
       };
       const handleSelectImage = (item: any) => {
             dispatch(setImage(item));
             setSelectImg(false);
+
       }
       const RenderImage = React.memo(({ item }: any) => {
             return (
