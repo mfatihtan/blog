@@ -21,6 +21,7 @@ const Index = ({ navigation }: any) => {
             <View style={styles.root}>
                   <StatusBar translucent barStyle={"light-content"} backgroundColor={"transparent"} />
                   <FlatList
+                        stickyHeaderIndices={[0]}
                         key={style}
                         numColumns={numberOfLines}
                         ListHeaderComponent={<HomeHeader changeStyle={changeStyle} style={style} />}

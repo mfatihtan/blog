@@ -9,6 +9,7 @@ import IconAD from 'react-native-vector-icons/AntDesign';
 import IconCMI from 'react-native-vector-icons/MaterialCommunityIcons';
 import IconEI from 'react-native-vector-icons/EvilIcons';
 import IconF from 'react-native-vector-icons/Feather';
+import IconMCI from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const RenderIcon = ({ Icon, name, size = 24, color = themeColor.royalBlue }: any) => {
       if (Icon == "IconE") {
@@ -31,6 +32,8 @@ const RenderIcon = ({ Icon, name, size = 24, color = themeColor.royalBlue }: any
             Icon = IconEI;
       } else if (Icon == "IconF") {
             Icon = IconF;
+      } else if (Icon == "IconMCI") {
+            Icon = IconMCI;
       }
       return (
             <Icon name={name} size={size} color={color} />

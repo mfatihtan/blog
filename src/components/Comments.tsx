@@ -1,15 +1,24 @@
-import { Modal, ScrollView, StatusBar, StyleSheet, Text, View } from 'react-native'
-import React, { useEffect, useRef } from 'react'
+import { Modal, StatusBar, StyleSheet, Text, View } from 'react-native'
+import React, { useEffect, useRef, useState } from 'react'
 import { RenderComment, NewComment } from '../components';
 import { useSelector } from 'react-redux';
+import { SwipeListView } from 'react-native-swipe-list-view';
+import { RenderHiddenComment } from './RenderComment';
 
 const Comments = ({ item, visible, setVisible }: any) => {
       const postComments = useSelector((state: any) => state.data.data[item].comments);
-      const scrollViewRef = useRef<ScrollView>(null);
+      const [openRowKey, setOpenRowKey] = useState(null);
+      const listViewRef = useRef<any>(null);
 
       useEffect(() => {
-            scrollViewRef.current?.scrollToEnd({ animated: true });
+            listViewRef.current?._listView.scrollToEnd({ animated: true });
       }, [postComments]);
+      const handleRowOpen = (rowKey: any) => {
+            if (openRowKey && openRowKey !== rowKey) {
+                  listViewRef.current._rows[openRowKey].closeRow();
+            }
+            setOpenRowKey(rowKey);
+      };
       return (
             <Modal
                   visible={visible}
@@ -23,11 +32,19 @@ const Comments = ({ item, visible, setVisible }: any) => {
                               <View style={styles.head}>
                                     <Text style={styles.headText}>Yorumlar ({postComments.length})</Text>
                               </View>
-                              <ScrollView ref={scrollViewRef} style={{ backgroundColor: "#f1f1f1", }}>
-                                    <View style={styles.comments}>
-                                          {postComments.map((item: any) => RenderComment(item))}
-                                    </View>
-                              </ScrollView>
+                              <SwipeListView
+                                    ref={listViewRef}
+                                    style={styles.comments}
+                                    contentContainerStyle={{ alignItems: "center" }}
+                                    data={postComments}
+                                    renderItem={RenderComment}
+                                    renderHiddenItem={RenderHiddenComment}
+                                    leftOpenValue={75}
+                                    rightOpenValue={-75}
+                                    closeOnScroll={true}
+                                    onRowOpen={(rowKey) => handleRowOpen(rowKey)}
+                                    keyExtractor={(item: any) => item.comment_id}
+                              />
                               <NewComment item={item} />
                         </View>
                   </View>
@@ -64,7 +81,7 @@ const styles = StyleSheet.create({
             color: "black",
       },
       comments: {
-            padding: 10,
-            backgroundColor: "#f1f1f1"
+            backgroundColor: "#f1f1f1",
+            paddingTop: 20,
       },
 })

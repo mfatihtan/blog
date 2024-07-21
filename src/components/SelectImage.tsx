@@ -4,22 +4,22 @@ import { height, width } from '../theme/dimension'
 import RenderIcon from './RenderIcon'
 import themeColor from '../theme/themeColor'
 import getImage from '../../secret'
-import { useDispatch, UseDispatch } from 'react-redux'
+import { useDispatch, UseDispatch, useSelector } from 'react-redux'
 import { setImage } from '../redux/sileces/newPostSlice'
+import { setInput, setImage as setImg, setImages } from '../redux/sileces/imageSlice';
 
 const SelectImage = ({ setSelectImg }: any) => {
       const dispatch = useDispatch();
-      const [input, setInput] = useState("");
-      const [images, setImages] = useState([]);
+      const { input, image, images } = useSelector((state: any) => state.image);
       const handleImages = async (input: string) => {
             Keyboard.dismiss()
             const data: any = await getImage(input);
-            setImages(data);
+            dispatch(setImages(data));
       };
       const handleSelectImage = (item: any) => {
             dispatch(setImage(item));
+            dispatch(setImg(item));
             setSelectImg(false);
-
       }
       const RenderImage = React.memo(({ item }: any) => {
             return (
@@ -34,7 +34,7 @@ const SelectImage = ({ setSelectImg }: any) => {
       return (
             <View style={styles.root}>
                   <View style={styles.searchView}>
-                        <TextInput onChangeText={setInput} placeholder='Resim arayın...' style={styles.input} />
+                        <TextInput value={input} onChangeText={(input) => dispatch(setInput(input))} placeholder='Resim arayın...' style={styles.input} />
                         <View style={styles.searchButton}>
                               <TouchableOpacity onPress={() => handleImages(input)} disabled={input.length < 3} >
                                     <RenderIcon Icon={"IconF"} name={"search"} size={30} color={input.length < 3 ? "gray" : themeColor.royalBlue} />
