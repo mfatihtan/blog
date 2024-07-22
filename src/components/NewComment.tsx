@@ -1,27 +1,44 @@
-import { KeyboardAvoidingView, Platform, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { KeyboardAvoidingView, Platform, StyleSheet, Keyboard, TextInput, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react';
 import { RenderIcon } from '.';
 import { width } from '../theme/dimension';
 import themeColor from '../theme/themeColor';
 import { useDispatch, useSelector } from 'react-redux';
-import { setComment } from '../redux/sileces/dataSlice';
+import { setComment, updateComment } from '../redux/sileces/dataSlice';
+import { setNewComment, setNewCommentNull } from '../redux/sileces/newCommentSlice';
 
 const NewComment = ({ item }: any) => {
       const dispatch = useDispatch();
       const postComments = useSelector((state: any) => state.data.data[item].comments);
-      const [userName, setUserName] = useState("Mehmet Fatih T.");
-      const [newC, setNewC] = useState("");
+      const { userId, userName } = useSelector((state: any) => state.auth);
+      const { comment, comment_id, re_comment } = useSelector((state: any) => state.comment);
 
       const handleNewComment = () => {
-            if (newC != "" && newC.length > 5) {
+            Keyboard.dismiss();
+            if (comment != "" && comment.length > 5) {
                   const postId = item;
                   const newComment = {
-                        comment: newC,
+                        comment: comment,
                         comment_id: `comment${postComments.length + 1}`,
                         comment_user_name: userName,
+                        comment_user_id: userId,
                   }
                   dispatch(setComment({ postId, newComment }));
-                  setNewC("");
+                  dispatch(setNewCommentNull());
+            }
+      }
+      const handleReComment = () => {
+            Keyboard.dismiss();
+            if (comment != "" && comment.length > 5) {
+                  const postId = item;
+                  const newComment = {
+                        comment: comment,
+                        comment_id: comment_id,
+                        comment_user_name: userName,
+                        comment_user_id: userId,
+                  }
+                  dispatch(updateComment({ postId, newComment }));
+                  dispatch(setNewCommentNull());
             }
       }
       return (
@@ -31,8 +48,8 @@ const NewComment = ({ item }: any) => {
             >
                   <View style={styles.newComment}>
                         <View style={styles.row}>
-                              <TextInput value={newC} onChangeText={setNewC} multiline placeholder='Yorum yazmaya başla...' style={styles.input} />
-                              <TouchableOpacity onPress={() => handleNewComment()} style={styles.button}><RenderIcon Icon={"IconAD"} name={"arrowup"} color={"white"} /></TouchableOpacity>
+                              <TextInput value={comment} onChangeText={(comment) => dispatch(setNewComment({ comment, comment_id }))} multiline placeholder='Yorum yazmaya başla...' style={styles.input} />
+                              <TouchableOpacity onPress={() => re_comment ? handleReComment() : handleNewComment()} style={styles.button}><RenderIcon Icon={"IconAD"} name={"arrowup"} color={"white"} /></TouchableOpacity>
                         </View>
                   </View>
             </KeyboardAvoidingView>

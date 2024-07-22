@@ -1,30 +1,26 @@
 import { Modal, StatusBar, StyleSheet, Text, View } from 'react-native'
 import React, { useEffect, useRef, useState } from 'react'
 import { RenderComment, NewComment } from '../components';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { setNewCommentNull } from '../redux/sileces/newCommentSlice';
 import { SwipeListView } from 'react-native-swipe-list-view';
-import { RenderHiddenComment } from './RenderComment';
+import { RenderHiddenCommentUser, RenderHiddenCommentAdmin } from './RenderComment';
 
 const Comments = ({ item, visible, setVisible }: any) => {
       const postComments = useSelector((state: any) => state.data.data[item].comments);
-      const [openRowKey, setOpenRowKey] = useState(null);
       const listViewRef = useRef<any>(null);
-
+      const { isAdmin } = useSelector((state: any) => state.auth);
+      const { userId } = useSelector((state: any) => state.auth);
       useEffect(() => {
             listViewRef.current?._listView.scrollToEnd({ animated: true });
       }, [postComments]);
-      const handleRowOpen = (rowKey: any) => {
-            if (openRowKey && openRowKey !== rowKey) {
-                  listViewRef.current._rows[openRowKey].closeRow();
-            }
-            setOpenRowKey(rowKey);
-      };
+      const dispatch = useDispatch();
       return (
             <Modal
                   visible={visible}
                   statusBarTranslucent
                   animationType={"slide"}
-                  onRequestClose={() => setVisible(false)}
+                  onRequestClose={() => { setVisible(false), dispatch(setNewCommentNull()) }}
                   transparent
             >
                   <View style={styles.root}>
@@ -38,11 +34,11 @@ const Comments = ({ item, visible, setVisible }: any) => {
                                     contentContainerStyle={{ alignItems: "center" }}
                                     data={postComments}
                                     renderItem={RenderComment}
-                                    renderHiddenItem={RenderHiddenComment}
+                                    renderHiddenItem={(data) => isAdmin ? <RenderHiddenCommentAdmin data={data} postId={item} /> : <RenderHiddenCommentUser data={data} postId={item} userId={userId} />}
                                     leftOpenValue={75}
                                     rightOpenValue={-75}
                                     closeOnScroll={true}
-                                    onRowOpen={(rowKey) => handleRowOpen(rowKey)}
+                                    closeOnRowBeginSwipe={true}
                                     keyExtractor={(item: any) => item.comment_id}
                               />
                               <NewComment item={item} />

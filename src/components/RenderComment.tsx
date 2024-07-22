@@ -2,6 +2,9 @@ import { StyleSheet, Text, TouchableHighlight, TouchableOpacity, View } from 're
 import React from 'react'
 import RenderIcon from './RenderIcon'
 import { width } from '../theme/dimension'
+import { useDispatch } from 'react-redux'
+import { deleteComment, updateComment } from '../redux/sileces/dataSlice'
+import { setNewComment } from '../redux/sileces/newCommentSlice'
 
 const RenderComment = (data: any) => {
       return (
@@ -12,22 +15,43 @@ const RenderComment = (data: any) => {
       )
 }
 
-const RenderHiddenComment = (data: any) => {
+const RenderHiddenCommentAdmin = ({ data, postId }: any) => {
+      const dispatch = useDispatch();
+      const handleDeleteAdmin = (comment_id: any) => {
+            dispatch(deleteComment({ postId, comment_id }));
+      };
       return (
             <View key={data.item.comment_id} style={styles.costum}>
-                  {data.item.comment_user_name != "Elif B." ? <TouchableOpacity style={styles.button}>
+                  <TouchableOpacity onPress={() => handleDeleteAdmin(data.item.comment_id)} style={styles.button}>
                         <RenderIcon Icon={"IconMCI"} name={"delete"} color={"white"} size={34} />
                   </TouchableOpacity>
-                        : <View />}
-                  <TouchableOpacity style={[styles.button, { backgroundColor: "white" }]}>
-                        <RenderIcon Icon={"IconMCI"} name={"pencil-box"} color={"black"} size={34} />
-                  </TouchableOpacity>
+            </View >
+      )
+}
+const RenderHiddenCommentUser = ({ data, postId, userId }: any) => {
+      const dispatch = useDispatch();
+      const handleDeleteUser = (comment_id: any) => {
+            dispatch(deleteComment({ postId, comment_id }));
+      };
+      const handleCostumUser = (comment_id: any, comment: any) => {
+            dispatch(setNewComment({ comment, comment_id }))
+      };
+
+      return (
+            <View key={data.item.comment_id} style={styles.costum}>
+                  {data.item.comment_user_id == userId && <>
+                        <TouchableOpacity onPress={() => handleDeleteUser(data.item.comment_id)} style={styles.button}>
+                              <RenderIcon Icon={"IconMCI"} name={"delete"} color={"white"} size={34} />
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => handleCostumUser(data.item.comment_id, data.item.comment)} style={[styles.button, { backgroundColor: "white" }]}>
+                              <RenderIcon Icon={"IconMCI"} name={"pencil-box"} color={"black"} size={34} />
+                        </TouchableOpacity></>}
             </View >
       )
 }
 
 export default RenderComment
-export { RenderHiddenComment }
+export { RenderHiddenCommentAdmin, RenderHiddenCommentUser }
 
 const styles = StyleSheet.create({
       comment: {

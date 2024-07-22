@@ -3,6 +3,7 @@ import autReducer from './sileces/authSlice';
 import dataReducer from './sileces/dataSlice';
 import newPostReducer from './sileces/newPostSlice';
 import imageReducer from './sileces/imageSlice';
+import newCommentReducer from './sileces/newCommentSlice';
 
 export const store = configureStore({
       reducer: {
@@ -10,5 +11,6 @@ export const store = configureStore({
             data: dataReducer,
             newPost: newPostReducer,
             image: imageReducer,
+            comment: newCommentReducer,
       },
 })

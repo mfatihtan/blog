@@ -1,4 +1,5 @@
 type Comment = {
+      comment_user_id: string;
       comment_user_name: string;
       comment_id: string;
       comment: string;
@@ -27,11 +28,13 @@ const data: Data = {
             "tag": ["doğa", "sağlık", "yürüyüş"],
             "comments": [
                   {
+                        "comment_user_id": "user7",
                         "comment_user_name": "Ali Y.",
                         "comment_id": "comment1",
                         "comment": "Harika bir yazı, doğa yürüyüşleri benim de favorim!"
                   },
                   {
+                        "comment_user_id": "user7",
                         "comment_user_name": "Ayşe T.",
                         "comment_id": "comment2",
                         "comment": "Kesinlikle katılıyorum, doğada vakit geçirmek harika."
@@ -47,11 +50,13 @@ const data: Data = {
             "tag": ["yoga", "stres", "rahatlama"],
             "comments": [
                   {
+                        "comment_user_id": "user4",
                         "comment_user_name": "Mehmet K.",
                         "comment_id": "comment3",
                         "comment": "Yoga ile tanıştıktan sonra hayatım değişti."
                   },
                   {
+                        "comment_user_id": "user6",
                         "comment_user_name": "Elif B.",
                         "comment_id": "comment4",
                         "comment": "Yoga yapmaya başlayalı stresim azaldı."
@@ -67,104 +72,16 @@ const data: Data = {
             "tag": ["beslenme", "sağlık", "diyet"],
             "comments": [
                   {
+                        "comment_user_id": "user7",
                         "comment_user_name": "Ahmet D.",
                         "comment_id": "comment1",
                         "comment": "Sağlıklı beslenmek için neler yapmalıyız?"
                   },
                   {
+                        "comment_user_id": "user9",
                         "comment_user_name": "Zeynep L.",
                         "comment_id": "comment2",
                         "comment": "Faydalı bilgiler, teşekkürler!"
-                  },
-                  {
-                        "comment_user_name": "Ali Y.",
-                        "comment_id": "comment3",
-                        "comment": "Bu yazı gerçekten bilgilendirici, teşekkürler!"
-                  },
-                  {
-                        "comment_user_name": "Ayşe T.",
-                        "comment_id": "comment4",
-                        "comment": "Sağlıklı yaşam için harika ipuçları."
-                  },
-                  {
-                        "comment_user_name": "Mehmet K.",
-                        "comment_id": "comment5",
-                        "comment": "Daha fazla sağlıklı tarif paylaşır mısınız?"
-                  },
-                  {
-                        "comment_user_name": "Elif B.",
-                        "comment_id": "comment6",
-                        "comment": "Bu bilgileri günlük yaşantıma uygulayacağım."
-                  },
-                  {
-                        "comment_user_name": "Fatma A.",
-                        "comment_id": "comment7",
-                        "comment": "Sağlıklı beslenme konusunda daha fazla bilgi isterim."
-                  },
-                  {
-                        "comment_user_name": "Hakan E.",
-                        "comment_id": "comment8",
-                        "comment": "Bu yazıdan çok şey öğrendim, teşekkürler."
-                  },
-                  {
-                        "comment_user_name": "Sevil A.",
-                        "comment_id": "comment9",
-                        "comment": "Daha fazla sağlıklı beslenme önerisi alabilir miyiz?"
-                  },
-                  {
-                        "comment_user_name": "Cem B.",
-                        "comment_id": "comment10",
-                        "comment": "Bilgilendirici ve anlaşılır bir yazı olmuş."
-                  },
-                  {
-                        "comment_user_name": "Serkan Y.",
-                        "comment_id": "comment11",
-                        "comment": "Sağlıklı yaşam için motive edici bir yazı."
-                  },
-                  {
-                        "comment_user_name": "Leyla K.",
-                        "comment_id": "comment12",
-                        "comment": "Bu yazı benim için çok faydalı oldu."
-                  },
-                  {
-                        "comment_user_name": "Kadir T.",
-                        "comment_id": "comment13",
-                        "comment": "Daha fazla sağlıklı yaşam tüyoları paylaşır mısınız?"
-                  },
-                  {
-                        "comment_user_name": "Melis S.",
-                        "comment_id": "comment14",
-                        "comment": "Bu konudaki bilgiler çok işime yarayacak."
-                  },
-                  {
-                        "comment_user_name": "Derya Z.",
-                        "comment_id": "comment15",
-                        "comment": "Sağlıklı beslenme hakkında daha fazla yazı bekliyorum."
-                  },
-                  {
-                        "comment_user_name": "Osman R.",
-                        "comment_id": "comment16",
-                        "comment": "Çok faydalı bir yazı olmuş, teşekkürler."
-                  },
-                  {
-                        "comment_user_name": "Yasemin C.",
-                        "comment_id": "comment17",
-                        "comment": "Sağlıklı beslenme ile ilgili çok şey öğrendim."
-                  },
-                  {
-                        "comment_user_name": "Furkan B.",
-                        "comment_id": "comment18",
-                        "comment": "Bu bilgilerle sağlıklı yaşamıma daha çok dikkat edeceğim."
-                  },
-                  {
-                        "comment_user_name": "Gamze Y.",
-                        "comment_id": "comment19",
-                        "comment": "Sağlıklı tarifler hakkında daha fazla yazı isterim."
-                  },
-                  {
-                        "comment_user_name": "Tolga S.",
-                        "comment_id": "comment20",
-                        "comment": "Sağlıklı beslenme ile ilgili yazılarınızı dört gözle bekliyorum."
                   }
             ],
             "likes": ["user7", "user8", "user9"]
@@ -177,11 +94,13 @@ const data: Data = {
             "tag": ["meditasyon", "zihinsel sağlık", "rahatlama"],
             "comments": [
                   {
+                        "comment_user_id": "user11",
                         "comment_user_name": "Fatma A.",
                         "comment_id": "comment7",
                         "comment": "Meditasyon yapmaya başlayalı daha huzurluyum."
                   },
                   {
+                        "comment_user_id": "user10",
                         "comment_user_name": "Hakan E.",
                         "comment_id": "comment8",
                         "comment": "Harika bir yazı, teşekkürler."
@@ -197,11 +116,13 @@ const data: Data = {
             "tag": ["kitap", "okuma", "zihinsel sağlık"],
             "comments": [
                   {
+                        "comment_user_id": "user13",
                         "comment_user_name": "Sevil A.",
                         "comment_id": "comment9",
                         "comment": "Kitap okumak benim için bir tutku."
                   },
                   {
+                        "comment_user_id": "user15",
                         "comment_user_name": "Cem B.",
                         "comment_id": "comment10",
                         "comment": "Daha fazla kitap önerisi alabilir miyiz?"
@@ -217,12 +138,14 @@ const data: Data = {
             "tag": ["fotoğrafçılık", "başlangıç", "rehber"],
             "comments": [
                   {
+                        "comment_user_id": "user17",
                         "comment_user_name": "Serkan Y.",
                         "comment_id": "comment11",
                         "comment": "Fotoğrafçılık ile ilgilenenler için harika bir kaynak."
                   },
                   {
-                        "comment_user_name": "Leyla K.",
+                        "comment_user_id": "user17",
+                        "comment_user_name": "Serkan Y.",
                         "comment_id": "comment12",
                         "comment": "Bu rehber çok işime yaradı, teşekkürler!"
                   }
@@ -237,11 +160,13 @@ const data: Data = {
             "tag": ["dijital pazarlama", "strateji", "işletme"],
             "comments": [
                   {
+                        "comment_user_id": "user21",
                         "comment_user_name": "Kadir T.",
                         "comment_id": "comment13",
                         "comment": "İşletmem için çok faydalı bilgiler içeriyor."
                   },
                   {
+                        "comment_user_id": "user19",
                         "comment_user_name": "Melis S.",
                         "comment_id": "comment14",
                         "comment": "Dijital pazarlama ile ilgili daha fazla yazı bekliyoruz!"
@@ -257,11 +182,13 @@ const data: Data = {
             "tag": ["sürdürülebilir", "çevre", "yaşam tarzı"],
             "comments": [
                   {
+                        "comment_user_id": "user22",
                         "comment_user_name": "Derya Z.",
                         "comment_id": "comment15",
                         "comment": "Sürdürülebilir yaşam konusunda daha fazla bilgi almak istiyorum."
                   },
                   {
+                        "comment_user_id": "user24",
                         "comment_user_name": "Osman R.",
                         "comment_id": "comment16",
                         "comment": "Çok faydalı bir yazı olmuş, teşekkürler."
@@ -277,17 +204,19 @@ const data: Data = {
             "tag": ["spor", "evde spor", "sağlık"],
             "comments": [
                   {
+                        "comment_user_id": "user2",
                         "comment_user_name": "Yasemin C.",
                         "comment_id": "comment17",
                         "comment": "Evde spor yapmak gerçekten çok rahat."
                   },
                   {
+                        "comment_user_id": "user1",
                         "comment_user_name": "Furkan B.",
                         "comment_id": "comment18",
                         "comment": "Evde spor yaparak forma girdim!"
                   }
             ],
-            "likes": ["user25", "user26", "user27"]
+            "likes": ["user2", "user1", "user27"]
       },
       "post10": {
             "head": "Kariyer Gelişimi İçin İpuçları",
@@ -297,17 +226,19 @@ const data: Data = {
             "tag": ["kariyer", "gelişim", "başarı"],
             "comments": [
                   {
+                        "comment_user_id": "user10",
                         "comment_user_name": "Gamze Y.",
                         "comment_id": "comment19",
                         "comment": "Kariyerim için çok faydalı bilgiler."
                   },
                   {
+                        "comment_user_id": "user30",
                         "comment_user_name": "Tolga S.",
                         "comment_id": "comment20",
                         "comment": "Kariyerimde nasıl ilerleyeceğim konusunda yeni fikirler edindim."
                   }
             ],
-            "likes": ["user28", "user29", "user30"]
+            "likes": ["user10", "user29", "user30"]
       }
 };
 
